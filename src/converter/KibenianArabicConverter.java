@@ -48,7 +48,7 @@ public class KibenianArabicConverter {
             for (int i = 0; i < number.length(); i++) {
                 String sub = number.substring(i,i+1);
                 if (!validChars.contains(sub)) {
-                    throw new MalformedNumberException("Contained an Invalid Charactar");
+                    throw new MalformedNumberException("Contained an Invalid Character");
                 }
             }
         }
@@ -176,32 +176,38 @@ public class KibenianArabicConverter {
         //Gets the third section
         nums[2] = num;
 
+        System.out.println("1: " + nums[0] + "2: " + nums[1] + "3: " + nums[2]);
+
         for (int i = 0; i < 3; i++) {
-            if (nums[i] / 50 > 0) {
+            int tempNum = nums[i];
+            if (tempNum / 50 > 0) {
                 stringNums[i] += "L";
             }
-            nums[i] %= 50;
+            tempNum %= 50;
 
-            for (int j = 0; j < nums[j] / 10; j++) {
+            for (int j = 0; j < tempNum / 10; j++) {
                 stringNums[i] += "X";
             }
-            nums[i] %= 10;
+            tempNum %= 10;
 
-            if (nums[i] / 5 > 0) {
+            if (tempNum / 5 > 0) {
                 stringNums[i] += "V";
             }
-            nums[i] %= 5;
+            tempNum %= 5;
 
-            for (int j = 0; j < nums[j]; j++) {
+            for (int j = 0; j < tempNum; j++) {
                 stringNums[i] += "I";
             }
         }
         String answer = "";
         if (nums[0] != 0) {
-            answer += stringNums[0];
+            answer += stringNums[0] + "_";
+            if (nums[1] == 0) {
+                answer += "_";
+            }
         }
         if (nums[1] != 0) {
-            answer += stringNums[1];
+            answer += stringNums[1] + "_";
         }
         if (nums[2] != 0) {
             answer += stringNums[2];
