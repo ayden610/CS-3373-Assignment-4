@@ -72,97 +72,66 @@ public class KibenianArabicConverter {
         int secondSetMultiplicity = 0;
         int thirdSetMultiplicity = 0;
         int returnNumber = 0;
-        if(number.contains("_")){
-            if (number.contains("__")){
-                for (int i = 0; i < number.length(); i++){
-                    if( number.charAt(i) == '_'){
-                        firstSet = i;
-                        i = number.length();
-                    }
+        if(number.contains("_")) {
+            for (int i = 0; i < number.length(); i++) {
+                if (number.charAt(i) == '_') {
+                    firstSet = i;
+                    i = number.length();
                 }
-                for (int i = 0; i < firstSet; i++){ //sort through numbers before the first _
-                    if(number.charAt(i) == 'L'){        //add 50 if number is an L to first set
-                        firstSetMultiplicity += 50;
-                    } else if(number.charAt(i) == 'X'){ //add 10 if number is an X to first set
-                        firstSetMultiplicity += 10;
-                    } else if(number.charAt(i) == 'V'){ //add 5 if number is a V to first set
-                        firstSetMultiplicity += 5;
-                    } else if(number.charAt(i) == 'I'){ //add 1 if number is an I to first set
-                        firstSetMultiplicity += 1;
-                    }
-                }
-                for (int i = firstSet + 1; i < number.length(); i++){
-                    if( number.charAt(i) == '_'){
-                        secondSet = i;
-                        i = number.length();
-                    }
-                }
-                for (int i = firstSet + 1; i < secondSet; i++){
-                    if(number.charAt(i) == 'L'){        //add 50 if number is an L to second set
-                        secondSetMultiplicity += 50;
-                    } else if(number.charAt(i) == 'X'){ //add 10 if number is an X to second set
-                        secondSetMultiplicity += 10;
-                    } else if(number.charAt(i) == 'V'){ //add 5 if number is a V to second set
-                        secondSetMultiplicity += 5;
-                    } else if(number.charAt(i) == 'I'){ //add 1 if number is an I to second set
-                        secondSetMultiplicity += 1;
-                    }
-                }
-                for (int i = secondSet + 1; i < number.length(); i++){
-                    if(number.charAt(i) == 'L'){        //add 50 if number is an L to third set
-                        thirdSetMultiplicity += 50;
-                    } else if(number.charAt(i) == 'X'){ //add 10 if number is an X to third set
-                        thirdSetMultiplicity += 10;
-                    } else if(number.charAt(i) == 'V'){ //add 5 if number is a V to third set
-                        thirdSetMultiplicity += 5;
-                    } else if(number.charAt(i) == 'I'){ //add 1 if number is an I to third set
-                        thirdSetMultiplicity += 1;
-                    }
-                }
-
-                returnNumber = (firstSetMultiplicity * 3600) + (secondSetMultiplicity * 60) + thirdSetMultiplicity;
-                return returnNumber;
-            } else {
-                for (int i = 0; i < number.length(); i++){
-                    if( number.charAt(i) == '_'){
-                        secondSet = i;
-                        i = number.length();
-                    }
-                }
-                for (int i = 0; i < secondSet; i++){
-                    if(number.charAt(i) == 'L'){        //add 50 if number is an L to second set
-                        secondSetMultiplicity += 50;
-                    } else if(number.charAt(i) == 'X'){ //add 10 if number is an X to second set
-                        secondSetMultiplicity += 10;
-                    } else if(number.charAt(i) == 'V'){ //add 5 if number is a V to second set
-                        secondSetMultiplicity += 5;
-                    } else if(number.charAt(i) == 'I'){ //add 1 if number is an I to second set
-                        secondSetMultiplicity += 1;
-                    }
-                }
-                for (int i = secondSet + 1; i < number.length(); i++){
-                    if(number.charAt(i) == 'L'){        //add 50 if number is an L to third set
-                        thirdSetMultiplicity += 50;
-                    } else if(number.charAt(i) == 'X'){ //add 10 if number is an X to third set
-                        thirdSetMultiplicity += 10;
-                    } else if(number.charAt(i) == 'V'){ //add 5 if number is a V to third set
-                        thirdSetMultiplicity += 5;
-                    } else if(number.charAt(i) == 'I'){ //add 1 if number is an I to third set
-                        thirdSetMultiplicity += 1;
-                    }
-                }
-                returnNumber = (secondSetMultiplicity * 60) + thirdSetMultiplicity;
-                return returnNumber;
             }
+            for (int i = 0; i < firstSet; i++) { //sort through numbers before the first _
+                if (number.charAt(i) == 'L') {        //add 50 if number is an L to first set
+                    firstSetMultiplicity += 50;
+                } else if (number.charAt(i) == 'X') { //add 10 if number is an X to first set
+                    firstSetMultiplicity += 10;
+                } else if (number.charAt(i) == 'V') { //add 5 if number is a V to first set
+                    firstSetMultiplicity += 5;
+                } else if (number.charAt(i) == 'I') { //add 1 if number is an I to first set
+                    firstSetMultiplicity += 1;
+                }
+            }
+                for (int i = firstSet + 1; i < number.length(); i++) {
+                    if (number.charAt(i) == '_') {
+                        secondSet = i;
+                        i = number.length();
+                    } else secondSet = number.length();
+                }
+                for (int i = firstSet + 1; i < secondSet; i++) {
+                    if (number.charAt(i) == 'L') {        //add 50 if number is an L to second set
+                        secondSetMultiplicity += 50;
+                    } else if (number.charAt(i) == 'X') { //add 10 if number is an X to second set
+                        secondSetMultiplicity += 10;
+                    } else if (number.charAt(i) == 'V') { //add 5 if number is a V to second set
+                        secondSetMultiplicity += 5;
+                    } else if (number.charAt(i) == 'I') { //add 1 if number is an I to second set
+                        secondSetMultiplicity += 1;
+                    }
+                }
+                if (secondSet != number.length()) {
+                    for (int i = secondSet + 1; i < number.length(); i++) {
+                        if (number.charAt(i) == 'L') {        //add 50 if number is an L to third set
+                            thirdSetMultiplicity += 50;
+                        } else if (number.charAt(i) == 'X') { //add 10 if number is an X to third set
+                            thirdSetMultiplicity += 10;
+                        } else if (number.charAt(i) == 'V') { //add 5 if number is a V to third set
+                            thirdSetMultiplicity += 5;
+                        } else if (number.charAt(i) == 'I') { //add 1 if number is an I to third set
+                            thirdSetMultiplicity += 1;
+                        }
+                    }
+                    returnNumber = (firstSetMultiplicity * 3600) + (secondSetMultiplicity * 60) + thirdSetMultiplicity;
+                    return returnNumber;
+                } else returnNumber = (firstSetMultiplicity * 60) + secondSetMultiplicity;
+                return returnNumber;
         }
-        for (int i = 0; i < number.length(); i++){
-            if(number.charAt(i) == 'L'){        //add 50 if number is an L to third set
+        for (int i = 0; i < number.length(); i++) {
+            if (number.charAt(i) == 'L') {        //add 50 if number is an L to third set
                 thirdSetMultiplicity += 50;
-            } else if(number.charAt(i) == 'X'){ //add 10 if number is an X to third set
+            } else if (number.charAt(i) == 'X') { //add 10 if number is an X to third set
                 thirdSetMultiplicity += 10;
-            } else if(number.charAt(i) == 'V'){ //add 5 if number is a V to third set
+            } else if (number.charAt(i) == 'V') { //add 5 if number is a V to third set
                 thirdSetMultiplicity += 5;
-            } else if(number.charAt(i) == 'I'){ //add 1 if number is an I to third set
+            } else if (number.charAt(i) == 'I') { //add 1 if number is an I to third set
                 thirdSetMultiplicity += 1;
             }
         }
