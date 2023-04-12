@@ -26,8 +26,36 @@ public class KibenianArabicConverter {
      * to the rules of the Kibenian number system or any other error in Arabic number input.
      */
     public KibenianArabicConverter(String number) throws MalformedNumberException, ValueOutOfBoundsException {
-
         // TODO check to see if the number is valid, then set it equal to the string
+        int num = 0;
+
+        boolean isArabic = true;
+        try {
+            num = Integer.parseInt(number);
+        } catch (Exception e) {
+            isArabic = false;
+        }
+
+        if (isArabic) {
+            if (num > 215999 || num <= 0) {
+                throw new ValueOutOfBoundsException("Integer Value is out of Bounds");
+            }
+            if (number.contains(".") || number.charAt(0) == '0') {
+                throw new MalformedNumberException("Integer Value incorrect format");
+            }
+        } else {
+            String validChars = "LXVI_";
+            for (int i = 0; i < number.length(); i++) {
+                String sub = number.substring(i,i+1);
+                if (!validChars.contains(sub)) {
+                    throw new MalformedNumberException("Contained an Invalid Charactar");
+                }
+            }
+        }
+
+        if (number.contains(" ")) {
+            throw new MalformedNumberException("Number cannot contain space");
+        }
         this.number = number;
     }
 
@@ -153,17 +181,26 @@ public class KibenianArabicConverter {
 
         //Represents the different sections seperated by underscores in decimal
         int[] nums = new int[3];
+        nums[0] = 0;
+        nums[1] = 0;
+        nums[2] = 0;
 
         //Represents the different sections seperated by underscores in Kibenian
         String[] stringNums = new String[3];
+        stringNums[0] = "";
+        stringNums[1] = "";
+        stringNums[2] = "";
 
         //Gets the first section
-        nums[0] = num/3600;
-
+        if (num / 3600 > 0) {
+            nums[0] = num / 3600;
+        }
         num = num % 3600;
 
         //Gets the second section
-        nums[1] = num/60;
+        if (num / 60 > 0) {
+            nums[1] = num/60;
+        }
 
         num = num % 60;
 
@@ -186,12 +223,21 @@ public class KibenianArabicConverter {
             }
             nums[i] %= 5;
 
-            for (int j = 0; j < nums[j] / 10; j++) {
+            for (int j = 0; j < nums[j]; j++) {
                 stringNums[i] += "I";
             }
         }
-
-        return stringNums[0] + "_" + stringNums[1] + "_" + stringNums[2];
+        String answer = "";
+        if (nums[0] != 0) {
+            answer += stringNums[0];
+        }
+        if (nums[1] != 0) {
+            answer += stringNums[1];
+        }
+        if (nums[2] != 0) {
+            answer += stringNums[2];
+        }
+        return answer;
     }
 
 }
