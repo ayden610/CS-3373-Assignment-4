@@ -13,11 +13,27 @@ import static org.junit.Assert.assertEquals;
 public class ConverterTests {
 
     @Test
-    public void KibenianToArabicSampleTest() throws MalformedNumberException, ValueOutOfBoundsException {
+    public void ArabicToKibenianSampleTestOneSet() throws MalformedNumberException, ValueOutOfBoundsException {
         KibenianArabicConverter converter = new KibenianArabicConverter("1");
         assertEquals(converter.toKibenian(), "I");
     }
 
+    @Test
+    public void ArabicToKibenianSampleTestTwoSet() throws MalformedNumberException, ValueOutOfBoundsException {
+        KibenianArabicConverter converter = new KibenianArabicConverter("61");
+        assertEquals(converter.toKibenian(), "I_I");
+    }
+
+    @Test
+    public void ArabicToKibenianSampleTestThreeSet() throws MalformedNumberException, ValueOutOfBoundsException {
+        KibenianArabicConverter converter = new KibenianArabicConverter("3661");
+        assertEquals(converter.toKibenian(), "I_I_I");
+    }
+    @Test
+    public void ArabicToKibenianSampleTestOneGap() throws MalformedNumberException, ValueOutOfBoundsException {
+        KibenianArabicConverter converter = new KibenianArabicConverter("60");
+        assertEquals(converter.toKibenian(), "I_");
+    }
 
     @Test(expected = MalformedNumberException.class)
     public void malformedNumberTest() throws MalformedNumberException, ValueOutOfBoundsException {
