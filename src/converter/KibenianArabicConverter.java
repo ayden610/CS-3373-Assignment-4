@@ -147,8 +147,51 @@ public class KibenianArabicConverter {
      * @return A Kibenian value
      */
     public String toKibenian() {
-        // TODO Fill in the method's body
-        return "I";
+
+        //Gets the number as an integer
+        int num = Integer.parseInt(number);
+
+        //Represents the different sections seperated by underscores in decimal
+        int[] nums = new int[3];
+
+        //Represents the different sections seperated by underscores in Kibenian
+        String[] stringNums = new String[3];
+
+        //Gets the first section
+        nums[0] = num/3600;
+
+        num = num % 3600;
+
+        //Gets the second section
+        nums[1] = num/60;
+
+        num = num % 60;
+
+        //Gets the third section
+        nums[2] = num;
+
+        for (int i = 0; i < 3; i++) {
+            if (nums[i] / 50 > 0) {
+                stringNums[i] += "L";
+            }
+            nums[i] %= 50;
+
+            for (int j = 0; j < nums[j] / 10; j++) {
+                stringNums[i] += "X";
+            }
+            nums[i] %= 10;
+
+            if (nums[i] / 5 > 0) {
+                stringNums[i] += "V";
+            }
+            nums[i] %= 5;
+
+            for (int j = 0; j < nums[j] / 10; j++) {
+                stringNums[i] += "I";
+            }
+        }
+
+        return stringNums[0] + "_" + stringNums[1] + "_" + stringNums[2];
     }
 
 }
