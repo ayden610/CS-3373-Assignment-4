@@ -66,7 +66,7 @@ public class KibenianArabicConverter {
                     if (number.charAt(i) == '_') {
                         secondSet = i;
                         i = number.length();
-                    } else secondSet = number.length() +1;
+                    } else secondSet = number.length();
                 }
                 for (int i = firstSet + 1; i < secondSet; i++) {
                     if (number.charAt(i) == 'L') {        //add 50 if number is an L to second set
@@ -79,7 +79,7 @@ public class KibenianArabicConverter {
                         secondSetMultiplicity += 1;
                     }
                 }
-                if (secondSet != number.length()+1) {
+                if (secondSet != number.length()) {
                     for (int i = secondSet + 1; i < number.length(); i++) {
                         if (number.charAt(i) == 'L') {        //add 50 if number is an L to third set
                             thirdSetMultiplicity += 50;

@@ -11,9 +11,9 @@ public class Main {
     }
 
     public static void main(String[] args) throws MalformedNumberException, ValueOutOfBoundsException {
-        String number = "I_X";
+        String number = "X_I";
         KibenianArabicConverter KAC = new KibenianArabicConverter(number);
-        KAC.toArabic();
+        System.out.println(KAC.toArabic());
     }
 
 }
