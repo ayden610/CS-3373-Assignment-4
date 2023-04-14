@@ -25,6 +25,17 @@ public class ConverterTests {
     }
 
     @Test
+    public void ArabicToKibenianSampleTestDifferentLetters() throws MalformedNumberException, ValueOutOfBoundsException {
+        KibenianArabicConverter converter = new KibenianArabicConverter("75316");
+        assertEquals(converter.toKibenian(), "XX_LV_XVI");
+    }
+    @Test
+    public void ArabicToKibenianSampleTestTwoFarSet() throws MalformedNumberException, ValueOutOfBoundsException {
+        KibenianArabicConverter converter = new KibenianArabicConverter("3601");
+        assertEquals(converter.toKibenian(), "I__I");
+    }
+
+    @Test
     public void ArabicToKibenianSampleTestThreeSet() throws MalformedNumberException, ValueOutOfBoundsException {
         KibenianArabicConverter converter = new KibenianArabicConverter("3661");
         assertEquals(converter.toKibenian(), "I_I_I");
