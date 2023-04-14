@@ -66,6 +66,7 @@ public class KibenianArabicConverter {
                     vCount = 0;
                     iCount = 0;
                     valCount = 0;
+                    lastChar = '_';
                     _Count++;
                 } else if (number.charAt(i) == 'L') {
                     lCount++;
