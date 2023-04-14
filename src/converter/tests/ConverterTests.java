@@ -5,7 +5,7 @@ import converter.exceptions.MalformedNumberException;
 import converter.exceptions.ValueOutOfBoundsException;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Test cases for the KibenianArabicConverter class.
@@ -79,4 +79,62 @@ public class ConverterTests {
         KibenianArabicConverter converter = new KibenianArabicConverter("I_V_");
         assertEquals(converter.toArabic(), 3900);
     }
+
+   @Test
+    public void MalformedNumberException2V() throws MalformedNumberException, ValueOutOfBoundsException {
+        Exception exception = assertThrows(MalformedNumberException.class, () -> {
+           new KibenianArabicConverter("VV_L_VI");
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "Incorrect Kibenian Format";
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+   @Test
+    public void MalformedNumberException2L() throws MalformedNumberException, ValueOutOfBoundsException {
+        Exception exception = assertThrows(MalformedNumberException.class, () -> {
+           new KibenianArabicConverter("XXXX_LL_VI");
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "Incorrect Kibenian Format";
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+   @Test
+    public void MalformedNumberException5I() throws MalformedNumberException, ValueOutOfBoundsException {
+        Exception exception = assertThrows(MalformedNumberException.class, () -> {
+           new KibenianArabicConverter("XXX_L_VIIIII");
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "Incorrect Kibenian Format";
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+   @Test
+    public void MalformedNumberExceptionOver59() throws MalformedNumberException, ValueOutOfBoundsException {
+        Exception exception = assertThrows(MalformedNumberException.class, () -> {
+           new KibenianArabicConverter("LX_L_VI");
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "Incorrect Kibenian Format";
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+   @Test
+    public void MalformedNumberExceptionfalseOrder1() throws MalformedNumberException, ValueOutOfBoundsException {
+        Exception exception = assertThrows(MalformedNumberException.class, () -> {
+           new KibenianArabicConverter("XXL_L_VI");
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "Incorrect Kibenian Format";
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+    
+
+    @Test
+    public void MalformedNumberException5X() throws MalformedNumberException, ValueOutOfBoundsException {
+        Exception exception = assertThrows(MalformedNumberException.class, () -> {
+           new KibenianArabicConverter("XXXXX_L_VI");
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "Incorrect Kibenian Format";
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
 }
