@@ -43,6 +43,7 @@ public class KibenianArabicConverter {
             if (number.contains(".") || number.charAt(0) == '0') {
                 throw new MalformedNumberException("Integer Value incorrect format");
             }
+
         } else {
             String validChars = "LXVI_";
             for (int i = 0; i < number.length(); i++) {
