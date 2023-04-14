@@ -125,7 +125,43 @@ public class ConverterTests {
         String expectedMessage = "Incorrect Kibenian Format";
         assertTrue(actualMessage.contains(expectedMessage));
     }
-    
+    @Test
+    public void MalformedNumberExceptionfalseOrder2() throws MalformedNumberException, ValueOutOfBoundsException {
+        Exception exception = assertThrows(MalformedNumberException.class, () -> {
+            new KibenianArabicConverter("VL_L_VI");
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "Incorrect Kibenian Format";
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+    @Test
+    public void MalformedNumberExceptionfalseOrder3() throws MalformedNumberException, ValueOutOfBoundsException {
+        Exception exception = assertThrows(MalformedNumberException.class, () -> {
+            new KibenianArabicConverter("IL_L_VI");
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "Incorrect Kibenian Format";
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void MalformedNumberExceptionSpace() throws MalformedNumberException, ValueOutOfBoundsException {
+        Exception exception = assertThrows(MalformedNumberException.class, () -> {
+            new KibenianArabicConverter("XX _L_VI");
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "Contained an Invalid Character";
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+    @Test
+    public void MalformedNumberExceptionSpacebeforeL() throws MalformedNumberException, ValueOutOfBoundsException {
+        Exception exception = assertThrows(MalformedNumberException.class, () -> {
+            new KibenianArabicConverter("XX_ L_VI");
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "Contained an Invalid Character";
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 
     @Test
     public void MalformedNumberException5X() throws MalformedNumberException, ValueOutOfBoundsException {
