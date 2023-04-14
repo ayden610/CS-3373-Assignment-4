@@ -29,6 +29,10 @@ public class KibenianArabicConverter {
         // TODO check to see if the number is valid, then set it equal to the string
         int num = 0;
 
+        if (number.contains(" ")) {
+            throw new MalformedNumberException("Contained an Invalid Character");
+        }
+
         boolean isArabic = true;
         try {
             num = Integer.parseInt(number);
@@ -45,12 +49,75 @@ public class KibenianArabicConverter {
             }
 
         } else {
-            String validChars = "LXVI_";
+
+            int lCount = 0;
+            int xCount = 0;
+            int vCount = 0;
+            int iCount = 0;
+            int _Count = 0;
+            int valCount = 0;
+            char lastChar = ' ';
+            boolean isValid = true;
+
             for (int i = 0; i < number.length(); i++) {
-                String sub = number.substring(i,i+1);
-                if (!validChars.contains(sub)) {
-                    throw new MalformedNumberException("Contained an Invalid Character");
+                if (number.charAt(i) == '_') {
+                    lCount = 0;
+                    xCount = 0;
+                    vCount = 0;
+                    iCount = 0;
+                    valCount = 0;
+                    _Count++;
+                } else if (number.charAt(i) == 'L') {
+                    lCount++;
+                    valCount += 50;
+
+                    if (lastChar == ' ' || lastChar == '_') {
+                        lastChar = 'L';
+                    } else {
+                        isValid = false;
+                    }
+
+                } else if (number.charAt(i) == 'X') {
+                    xCount++;
+                    valCount += 10;
+
+                    if (lastChar == ' ' || lastChar == 'L' || lastChar == 'X' || lastChar == '_') {
+                        lastChar = 'X';
+                    } else {
+                        isValid = false;
+                    }
+
+                } else if (number.charAt(i) == 'V') {
+                    vCount++;
+                    valCount += 5;
+
+                    if (lastChar == ' ' || lastChar == 'L' || lastChar == 'X' || lastChar == '_') {
+                        lastChar = 'V';
+                    } else {
+                        isValid = false;
+                    }
+
+                } else if (number.charAt(i) == 'I') {
+                    iCount++;
+                    valCount += 1;
+
+                    if (lastChar == ' ' || lastChar == 'L' || lastChar == 'X' || lastChar == 'V' || lastChar == 'I' || lastChar == '_') {
+                        lastChar = 'I';
+                    } else {
+                        isValid = false;
+                    }
+
+                } else {
+                    isValid = false;
                 }
+
+                if (lCount > 1 || xCount > 4 || vCount > 1 || iCount > 4 || _Count > 2 || valCount > 59) {
+                    isValid = false;
+                }
+            }
+
+            if (!isValid) {
+                throw new MalformedNumberException("Incorrect Kibenian Format");
             }
         }
 
