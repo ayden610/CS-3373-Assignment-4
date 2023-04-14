@@ -125,6 +125,7 @@ public class ConverterTests {
         String expectedMessage = "Incorrect Kibenian Format";
         assertTrue(actualMessage.contains(expectedMessage));
     }
+
     @Test
     public void MalformedNumberExceptionfalseOrder2() throws MalformedNumberException, ValueOutOfBoundsException {
         Exception exception = assertThrows(MalformedNumberException.class, () -> {
@@ -163,13 +164,33 @@ public class ConverterTests {
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
+
     @Test
     public void MalformedNumberException5X() throws MalformedNumberException, ValueOutOfBoundsException {
         Exception exception = assertThrows(MalformedNumberException.class, () -> {
-           new KibenianArabicConverter("XXXXX_L_VI");
+            new KibenianArabicConverter("XXXXX_L_VI");
         });
         String actualMessage = exception.getMessage();
         String expectedMessage = "Incorrect Kibenian Format";
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void ValueOutOfBoundsArabicTest1() throws MalformedNumberException, ValueOutOfBoundsException {
+        Exception exception = assertThrows(ValueOutOfBoundsException.class, () -> {
+            new KibenianArabicConverter("216000");
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "Integer Value is out of Bounds";
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+    @Test
+    public void ValueOutOfBoundsArabicTest2() throws MalformedNumberException, ValueOutOfBoundsException {
+        Exception exception = assertThrows(ValueOutOfBoundsException.class, () -> {
+            new KibenianArabicConverter("0");
+        });
+        String actualMessage = exception.getMessage();
+        String expectedMessage = "Integer Value is out of Bounds";
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
