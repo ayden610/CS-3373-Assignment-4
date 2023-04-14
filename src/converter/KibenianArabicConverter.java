@@ -56,6 +56,7 @@ public class KibenianArabicConverter {
             int iCount = 0;
             int _Count = 0;
             int valCount = 0;
+            int totalCount = 0;
             char lastChar = ' ';
             boolean isValid = true;
 
@@ -71,6 +72,7 @@ public class KibenianArabicConverter {
                 } else if (number.charAt(i) == 'L') {
                     lCount++;
                     valCount += 50;
+                    totalCount += 50;
 
                     if (lastChar == ' ' || lastChar == '_') {
                         lastChar = 'L';
@@ -81,6 +83,7 @@ public class KibenianArabicConverter {
                 } else if (number.charAt(i) == 'X') {
                     xCount++;
                     valCount += 10;
+                    totalCount += 10;
 
                     if (lastChar == ' ' || lastChar == 'L' || lastChar == 'X' || lastChar == '_') {
                         lastChar = 'X';
@@ -91,7 +94,7 @@ public class KibenianArabicConverter {
                 } else if (number.charAt(i) == 'V') {
                     vCount++;
                     valCount += 5;
-
+                    totalCount += 5;
                     if (lastChar == ' ' || lastChar == 'L' || lastChar == 'X' || lastChar == '_') {
                         lastChar = 'V';
                     } else {
@@ -101,6 +104,7 @@ public class KibenianArabicConverter {
                 } else if (number.charAt(i) == 'I') {
                     iCount++;
                     valCount += 1;
+                    totalCount += 1;
 
                     if (lastChar == ' ' || lastChar == 'L' || lastChar == 'X' || lastChar == 'V' || lastChar == 'I' || lastChar == '_') {
                         lastChar = 'I';
@@ -115,6 +119,9 @@ public class KibenianArabicConverter {
                 if (lCount > 1 || xCount > 4 || vCount > 1 || iCount > 4 || _Count > 2 || valCount > 59) {
                     isValid = false;
                 }
+            }
+            if(totalCount == 0){
+                isValid = false;
             }
 
             if (!isValid) {
